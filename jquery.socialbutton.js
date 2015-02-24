@@ -230,8 +230,7 @@
       },
       facebook_share: {
         button: 'button_count', // box_count / button / icon_link / icon
-        url: '', //document.URL
-        text: '' //Share
+        url: document.URL
       },
       twitter: {
         button: 'vertical', // vertical / horizontal / none
