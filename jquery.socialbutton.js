@@ -7,7 +7,7 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  *
- * Version: 1.9.1
+ * Version: 1.9.2
  */
 
 /**
@@ -503,26 +503,26 @@
       'height': height
     });
 
-    var tag = '<iframe src="http://www.facebook.com/plugins/like.php?' + params + '" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:' + width + 'px; height:' + height + 'px;" allowTransparency="true"></iframe>';
+    var tag = '<iframe src="//www.facebook.com/plugins/like.php?' + params + '" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width: ' + width + 'px; height:' + height + 'px;" allowTransparency="true"></iframe>';
 
     $(target).html(tag);
   }
 
   function socialbutton_facebook_share(target, options, defaults, index, max_index) {
-    var type = options.type || options.button || defaults.button;
+    var layout = options.type || options.button || defaults.button;
     var url = options.url || defaults.url;
-    var text = options.text || defaults.text;
 
-    var attr = merge_attributes({
-      'type': type,
-      'share_url': htmlspecialchars(url)
+    if (options.url) {
+      url = decodeURIComponent(url);
+    }
+    url = url_encode_rfc3986(url);
+
+    var params = merge_parameters({
+      'href': url,
+      'layout': layout
     });
 
-    var tag = '<a name="fb_share"' + attr + '>' + text + '</a>';
-
-    if (index == 0) {
-      tag += '<script type="text/javascript" src="http://static.ak.fbcdn.net/connect.php/js/FB.Share"></script>';
-    }
+    var tag = '<iframe src="//www.facebook.com/plugins/share_button.php?' + params + '" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>';
 
     $(target).html(tag);
   }
